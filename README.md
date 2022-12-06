@@ -44,16 +44,31 @@ This project consists of creating a virtual active directory lab to learn the ba
 <p align="left">
  -Open 'netowork & internet settings' &rarr; 'Ethernet' &rarr; 'Change adaptor options' <br/>
  -There will be 2 ethernets, idenify which one is connected to the internet & which one is an internal NIC. <br/>
- -Check properties on both *STOPED HERE*
+ -Check properties on both, the one that is Internal will have autoconfig IPv4 '169.254.196.79', rename the ethernets 'Internet' & 'Internal' for Identification.<br/>
+ -Go to properties on 'Internal" NIC, open 'IPv4 (TCP/ID) Properties'<br/>
+ -IP adresss = 172.16.0.1 &rarr; Subnet mask = 255.255.255.0 &rarr; Gateway = empty &rarr; DNS = 127.0.0.1 (Loopback Adress)<br/>
+ -Finally, right click start menu &rarr; 'system' &rarr; 'rename this pc', name it "DC" &rarr; restart VM<br/>
 <p align="center">
 <b>Step 5.) Installing Active Directory Domain Services & Create Domain</b>
+<p align="left">
+-Open 'server manager' app &rarr; on 'Dashboard' open 'Step 2, add roles & features', click 'next' untill 'server selection' tab, select 2019 win server, click 'next', select 'active directrory domain servies' role, click 'next' untill install & install.<br/>
+-Once installed, open notifcation flag on toolbar for server manager, under 'post deployment configure' click 'promote this PC'<br/>
+-In deployment configuration' select 'add new forest' & name root domain "mydomain.com"<br/>
+-Next, create password, continue clicking 'next' untill installed, will automatically restart VM.<br/>
+-Login
 <p align="left">
 <p align="center">
 <b>Step 6.) Create Domain Admin Account </b>
 <p align="left">
+-Windows 'Start' &rarr; 'Windows Administative Tools' &rarr; 'Active Directory Users & Computers'<br/>
+-Right click 'mydomain.com' &rarr; 'new' &rarr; 'orginizational unit' <br/>
+-Name "ADMINS" &rarr; right click 'ADMINS' &rarr; 'new' &rarr; 'user', create user with your name and password, check 'password never expires' (for the sake of the lab) <br/>
+-Right click your user &rarr; 'properties' &rarr; 'member of' &rarr; 'add' &rarr; type "domain admins", click 'check names', click 'okay'<br/>
+-Sign out, select 'other user', user admin login just created<br/>
 <p align="center">
 <b>Step 7.) Install Remote Access Server/NAT(Network Adress Translation)</b>
 <p align="left">
+-on 'Server manager' app select 'roles & features' &rarr; 'next' &rarr; 'next' &rarr; select server
 <p align="center">
 <b>Step 8.) Set-Up DHCP on Domain Controller</b>
 <p align="left">
