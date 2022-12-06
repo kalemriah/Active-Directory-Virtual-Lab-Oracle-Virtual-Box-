@@ -68,16 +68,35 @@ This project consists of creating a virtual active directory lab to learn the ba
 <p align="center">
 <b>Step 7.) Install Remote Access Server/NAT(Network Adress Translation)</b>
 <p align="left">
--on 'Server manager' app select 'roles & features' &rarr; 'next' &rarr; 'next' &rarr; select server
+-on 'Server manager' app select 'roles & features' &rarr; 'next' &rarr; 'next' &rarr; select server &rarr; select 'remote access' role, select 'routing' box, select next and install<br/>
+-On server manager toolbar select 'tools' &rarr; 'routing & remote access', right click 'DC(local)' &rarr; 'configure & enable & remote access', select next, select 'network adress translation(NAT)' &rarr; select the network intergace previously labled "internet" &rarr; finish<br/>
 <p align="center">
 <b>Step 8.) Set-Up DHCP on Domain Controller</b>
 <p align="left">
+-Server amanger &rarr; add roles &rarr; next &rarr; select server &rarr; select 'DHCP' roles &rarr; next & install<br/>
+-Select 'tools' on server manager taskbar &rarr; select 'DHCP', open 'dc.mydomain.com', right click 'IPv4' &rarr; select 'new scope'<br/>
+-Name after scope IP range "172.16.0.100-200", next start IP = 172.16.0.100 &rarr; end IP = 172.16.0.200 &rarr; subnet lenght = 24 &rarr; subnet = 255.255.255.0, click next, use lease date of one day. Select 'yes I want to setup a DHCP controller', click next, enter "172.16.0.1" (DC NAT IP)  for IP, click 'add' , click next, click next & finish<br/>
+-Right click 'dc.mydomain.com' & refresh, then the 'IPv4', 'IPv6' icons should be green<br/>
+-To allow internet access from DC without "are you sure". Pop-ups config &rarr; select 'off' for 'users' &rarr; select okay (this is done only for the sake of the lab)<br/>
 <p align="center">
-<b>Step 9.) Grab Github Powershell script </b>
+<b>Step 9.) Grab Github Powershell script to create a ton of users </b>
 <p align="left">
+-https://github.com/joshmadakor1/AD_PS This is the link is the PowerShell script for creating a ton of users. Install to deskstop or somewhere easily found.<br/>
+-Open foler downloaded &rarr; 'names' &rarr; add your name to the top of the file, then save & close.<br/>
+-Select windows start &rarr; Windows Powershell &rarr; Powershell ISE &rarr; run as admin.<br/>
+-Select folder icon & open Github powershell script<br/>
+-Type "Set-ExecutionPolicy Unrestricted" &rarr; change directory of powershell to github file, "C:\User\*admin user name*\desktop\AD-PS-master' select the green play icon to run script<br/> 
 <p align="center">
 <b>Step 10.) Create Win10 Client Virtual Enviorment</b>
 <p align="left">
+-Create new VM instance using Oracle virtual machine.<br/>
+-Adjust CPU & Memory to PC usage, Name "client"<br/>
+-Once created go to settings &rarr; network, change the 'attached to' to 'internal network' &rarr; okay<br/>
+-Start Vbox & select win10 ISO &rarr; Install &rarr; select 'win10 Pro' &rarr; next &rarr; select custom, then select Drive 0 &rarr; next & install.<br/>
+-Select limited versions & continue without internet &rarr; continue with win10 setup.<br/>
+-Once on desktop, open command terminal and type 'Ipconfig' to test the connection to the DC<br/>
+-Right click 'windows start' &rarr; 'system', scroll down to 'rename this PC(advance)' &rarr; click 'change', name "client1", select 'member of' domain & type "mydomain.com" &rarr; enter user & password <br/>
+-At this point the tutorial is complete and you can now play around and experiment in your active directory!
 
 
 </p>
